@@ -1,19 +1,15 @@
 import React from 'react'
 
 
-import './App.css'
+import './index.css'
+import Body from './components/Body'
 
 function App() {
   
 
   return (
     <>
-      <div>
-        
-      </div>
-      <p className='text-3xl font-bold underline text-6xl text-red-600'>
-        Click on the Vite and React logos to learn more
-      </p>
+     <Body />
     </>
   )
 }
