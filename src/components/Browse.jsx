@@ -1,9 +1,10 @@
 import React from 'react'
+import Header from './Header'
 
 const Browse = () => {
   return (
     <div>
-      <h2 className='text-2xl font-bold'>Browse</h2>
+      <Header />
     </div>
   )
 }
