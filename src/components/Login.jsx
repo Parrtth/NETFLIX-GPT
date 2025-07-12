@@ -3,17 +3,21 @@ import Header from './Header'
 import { checkValidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase'; 
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom  
 import { updateProfile } from 'firebase/auth'; // Import updateProfile to update user profile after sign up
+import { USER_AVATAR } from '../utils/constants';
 
-// const name = useRef(null);
+
+
+
+
 
 const Login = () => {
 
+  const name = useRef(null);
+
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errormessage, setErrorMessage] = useState('');
-  const navigate = useNavigate(); // Import useNavigate from react-router-dom
-  // Create refs for email and password inputs
+   
 
   const email = useRef(null);
    const password = useRef(null); 
@@ -41,30 +45,13 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value, photoURL: "https://media.licdn.com/dms/image/v2/D4D35AQF2PvlXx5ubiA/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1725304299224?e=1752580800&v=beta&t=2-7DZUy1QPfw3r-AXVZEg18EOxMKlO1Zdm95315E96Q"
+            displayName: name.current.value,
+            photoURL: USER_AVATAR
           }).then(() => {
-            navigate('/browse'); 
-            // Profile updated!
-            // ...
+           
           })
-          // .catch((error) => {
-          //   setErrorMessage(error.message);
-          //   // An error occurred
-          //   // ...
-          // });
-
-//           console.log(user);
-//           // Redirect to browse page after sign up
-
-//         })
-//         .catch((error) => {
-//           const errorCode = error.code;
-//   // An error occurred
-//   // ...
-// });
-
-          console.log(user);
-          navigate('/browse'); // Redirect to browse page after sign up
+          
+           // Redirect to browse page after sign up
 
         })
 
@@ -88,8 +75,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
-          navigate('/browse'); // Redirect to browse page after sign in
+          // Redirect to browse page after sign in
           // You can also dispatch an action to store user data in Redux or context if needed
 
         })
@@ -124,7 +110,7 @@ const Login = () => {
           {isSignInForm ? 'Sign In' : 'Sign Up'}
         </h2>
         {!isSignInForm && (
-        <input type="text" placeholder="Full Name" className="p-3 mb-4 rounded bg-gray-700/80 text-white focus:outline-none" /> )}
+        <input ref={name} type="text" placeholder="Full Name" className="p-3 mb-4 rounded bg-gray-700/80 text-white focus:outline-none" /> )}
         <input  ref={email} type="text" placeholder="Email or mobile number" className="p-3 mb-4 rounded bg-gray-700/80 text-white focus:outline-none" />
         <input ref={password} type="password" placeholder="Password" className="p-3 mb-6 rounded bg-gray-700/80 text-white focus:outline-none" />
         <p className="text-red-600 text-lg mb-4 font-bold">
