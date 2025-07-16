@@ -5,13 +5,16 @@ import { useNavigate } from 'react-router-dom' // Import useNavigate from react-
 import { useSelector, useDispatch } from 'react-redux' // Import useSelector from react-redux  
 import { onAuthStateChanged } from 'firebase/auth'
 import { addUser, removeUser } from '../utils/userSlice'
-import { LOGO } from '../utils/constants' 
+import { LOGO, SUPPORTED_LANGUAGES } from '../utils/constants' 
+import { toggleGptSearchView} from "../utils/gptSlice"
+import { changeLanguage } from '../utils/configSlice'
 
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Initialize useNavigate
   const user = useSelector(store => store.user);
+  const showGptSearch = useSelector(store => store.gpt.showGptSearch);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -48,6 +51,15 @@ const Header = () => {
 
   }, []);
 
+  const handleGptSearchClick = () => {
+    // Toggle GPT Search Button 
+    dispatch(toggleGptSearchView())
+  }
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  }
+
   
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center">
@@ -58,8 +70,20 @@ const Header = () => {
         alt="logo"
       />
       {/* User Icon and Sign Out - Only show if user is logged in (has uid) */}
-      { user && user.uid && (
+      { user && (
         <div className='flex items-center space-x-2'>
+          <select className=
+          "p-2 m-2  bg-gray-900 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 cursor-pointer shadow-md"
+          onChange={handleLanguageChange}
+          >
+            {SUPPORTED_LANGUAGES.map(lang => <option key={lang.identifier} value={lang.identifier} >{lang.name} </option>)}
+          </select>
+          <button
+            className='rounded-2xl bg-gray-900 text-white font-bold uppercase px-5 py-2 shadow-md transition-all duration-200 transform hover:bg-gray-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50'
+            onClick={handleGptSearchClick} 
+          >
+           {showGptSearch? "Homepage" :  "GPT Search" }
+          </button> 
         <img
           className='w-10 h-10'
           alt="usericon"

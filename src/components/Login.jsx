@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 import { auth } from '../utils/firebase'; 
 import { updateProfile } from 'firebase/auth'; // Import updateProfile to update user profile after sign up
 import { USER_AVATAR } from '../utils/constants';
+import { BG_URL } from '../utils/constants';
 
 
 
@@ -97,7 +98,7 @@ const Login = () => {
       {/* Background Image */}
       <img 
         className="absolute h-full w-full object-cover"
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/05e91faa-6f6d-4325-934e-5418dcc2567b/web/IN-en-20250630-TRIFECTA-perspective_159086b1-425f-435b-bcd5-1ed8039cdef9_small.jpg"
+        src={BG_URL}
         alt="Background"
       />
       {/* Gradient Overlay */}
