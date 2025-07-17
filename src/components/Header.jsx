@@ -62,24 +62,27 @@ const Header = () => {
 
   
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center">
+    <div className="fixed top-0 left-0 w-full px-8 py-2 bg-gradient-to-b from-black z-20 flex justify-between items-center">
       {/* Logo */}
       <img
         className="w-44 p-4"
         src={LOGO}
         alt="logo"
       />
+      
       {/* User Icon and Sign Out - Only show if user is logged in (has uid) */}
-      { user && (
+      { user?.uid && (
         <div className='flex items-center space-x-2'>
+          {user?.uid && showGptSearch &&(
           <select className=
           "p-2 m-2  bg-gray-900 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 cursor-pointer shadow-md"
           onChange={handleLanguageChange}
           >
             {SUPPORTED_LANGUAGES.map(lang => <option key={lang.identifier} value={lang.identifier} >{lang.name} </option>)}
           </select>
+          )}
           <button
-            className='rounded-2xl bg-gray-900 text-white font-bold uppercase px-5 py-2 shadow-md transition-all duration-200 transform hover:bg-gray-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50'
+            className='rounded-2xl bg-gray-900 text-white font-bold uppercase px-5 py-2 shadow-md transition-all duration-200 transform hover:bg-gray-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50'
             onClick={handleGptSearchClick} 
           >
            {showGptSearch? "Homepage" :  "GPT Search" }

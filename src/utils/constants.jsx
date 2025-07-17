@@ -3,7 +3,7 @@ export const  LOGO =
 
 
  export const USER_AVATAR = 
- "https://media.licdn.com/dms/image/v2/D4D35AQF2PvlXx5ubiA/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1725304299224?e=1752580800&v=beta&t=2-7DZUy1QPfw3r-AXVZEg18EOxMKlO1Zdm95315E96Q"
+ "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fnetflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg&f=1&nofb=1&ipt=7bcbb72bd68198efb12cae55e943f66fd2f7cc364c48b3d3781022f0a3045125"
 
 
  export const API_OPTIONS = {
