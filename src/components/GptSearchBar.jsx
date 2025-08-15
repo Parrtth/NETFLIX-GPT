@@ -43,25 +43,30 @@ const GptSearchBar = () => {
 
   return (
     <>
+      {/* Responsive Search Bar */}
       <form 
-        className='w-1/2 bg-black text-white grid grid-cols-12' 
+        className='w-full sm:w-3/4 md:w-1/2 bg-black text-white flex flex-col sm:flex-row items-center rounded-lg shadow-lg p-2 gap-2'
         onSubmit={handleSubmit}
       >
         <input 
           ref={searchText}
           type='text'
-          className='p-4 m-4 col-span-9 border-2'
+          className='flex-1 p-3 rounded-lg border-2 border-gray-700 bg-gray-900 text-white focus:outline-none w-full'
           placeholder={lang[langkey].gptSearchPlaceholder}
         />
         <button 
-          className='col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-lg'
+          className='bg-red-700 hover:bg-red-800 transition-colors text-white px-5 py-3 rounded-lg font-semibold w-full sm:w-auto'
           onClick={handleMovieSearchClick}
         >
           {lang[langkey].search}
         </button>
       </form>
-      {error && <div className="text-red-400 mt-2 ml-4">{error}</div>}
-      <div className="w-11/12 mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+      {/* Error Message */}
+      {error && <div className="text-red-400 mt-3 text-center">{error}</div>}
+
+      {/* Movie Results */}
+      <div className="w-11/12 mx-auto mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {movies.map(movie => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
