@@ -1,38 +1,25 @@
 import React from 'react'
 import GptSearchBar from './GptSearchBar'
-import GptMovieSuggestion from './GptMovieSuggestion'
+import GptMovieSuggestions from './GptMovieSuggestions'
 import { BG_URL } from '../utils/constants'
 
 const GptSearch = () => {
   return (
-    <div className="relative h-screen w-screen overflow-x-hidden">
-      {/* Background Image */}
-      <img
-        className="fixed -z-10 w-full h-full object-cover"
-        src={BG_URL}
-        alt="Background"
-      />
-
-      {/* Search Bar */}
-      <div
-        className="
-          absolute 
-          top-20 sm:top-1/4 
-          left-0 
-          w-full 
-          flex flex-col items-center 
-          px-4 sm:px-0 
-          z-10
-        "
+    <div className="relative min-h-screen">
+      <div 
+        className="fixed top-0 left-0 w-full h-screen -z-10"
+        style={{
+          backgroundImage: `url(${BG_URL})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
       >
-        <div className="w-full max-w-md sm:max-w-2xl">
-          <GptSearchBar />
-        </div>
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
       </div>
-
-      {/* Suggestions */}
-      <div className="relative z-20 mt-4 sm:mt-8 px-4 sm:px-8">
-        <GptMovieSuggestion />
+      
+      <div className="pt-[35%] md:pt-[10%] mx-auto w-full max-w-6xl px-4 md:px-6">
+        <GptSearchBar />
+        <GptMovieSuggestions />
       </div>
     </div>
   )

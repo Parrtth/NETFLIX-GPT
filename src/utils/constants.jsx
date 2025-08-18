@@ -12,6 +12,7 @@ export const  LOGO =
       accept: 'application/json',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDgyNWU0Mjk5ZjVmMWNiMjY0ZjA4OWY4YWM4MWNkZiIsIm5iZiI6MTc1MjA1NjAyNi40MTY5OTk4LCJzdWIiOiI2ODZlNDBkYTVhYmJiNjllM2Q5YTRiZTYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.P4NhZCvnvJGhukj96iJLiQogPc1bUTmrBh55dtnc91M'
     }
+    
   };
 
   export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500"
