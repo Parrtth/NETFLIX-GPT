@@ -1,12 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MovieCard = ({ movie, priority = false }) => {
   const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` 
+    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : null;
 
   return (
-    <div className={`
+    <Link
+      to={`/movie/${movie.id}`}
+      className={`
       relative rounded-lg overflow-hidden shadow-lg bg-[#181818] 
       ${priority ? 'w-32 sm:w-36 md:w-40 lg:w-44' : 'w-28 sm:w-32 md:w-36 lg:w-40'} 
       ${priority ? 'h-48 sm:h-52 md:h-56 lg:h-60' : 'h-40 sm:h-44 md:h-48 lg:h-52'} 
@@ -27,7 +30,7 @@ const MovieCard = ({ movie, priority = false }) => {
           No Image Available
         </div>
       )}
-      
+
       {/* Hover overlay with movie info */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-3">
         <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
@@ -45,16 +48,15 @@ const MovieCard = ({ movie, priority = false }) => {
           </div>
         </div>
       </div>
-      
+
       {/* Priority indicator for Now Playing section */}
       {priority && (
         <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-lg">
           NOW
         </div>
       )}
-    </div>
+    </Link>
   );
 };
 
 export default MovieCard;
-  

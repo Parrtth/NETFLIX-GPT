@@ -1,29 +1,34 @@
 import React from 'react'
 import Login from './Login'
 import Browse from './Browse'
+import MovieDetails from './MovieDetails'
 import { RouterProvider } from 'react-router-dom'
-import { createBrowserRouter,  } from 'react-router-dom'
-import { useDispatch } from 'react-redux' 
+import { createBrowserRouter, } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 
 const Body = () => {
-    const dispatch = useDispatch();
-    
+  const dispatch = useDispatch();
 
-    const appRouter = createBrowserRouter([
-        {
-            path: '/',
-            element: <Login />
-        },
-        {
-            path: '/browse',
-            element: <Browse />
-        }
-    ]);
 
-    
+  const appRouter = createBrowserRouter([
+    {
+      path: '/',
+      element: <Login />
+    },
+    {
+      path: '/browse',
+      element: <Browse />
+    },
+    {
+      path: '/movie/:movieId',
+      element: <MovieDetails />
+    }
+  ]);
 
-     
+
+
+
   return (
     <div>
       <RouterProvider router={appRouter} />
