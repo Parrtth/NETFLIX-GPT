@@ -36,7 +36,7 @@ const GptSearchBar = () => {
       const data = await response.json();
       setMovies(data.results || []);
       if ((data.results || []).length === 0) setError("No movies found.");
-    } catch (err) {
+    } catch {
       setError("Error fetching movies. Please try again later.");
     }
   };

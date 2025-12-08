@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import Header from './Header'
 import { checkValidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, getAuth, updateProfile } from "firebase/auth";
-import { auth } from '../utils/firebase'; 
+import { auth } from '../utils/firebase';
 import { USER_AVATAR, BG_URL } from '../utils/constants';
 import { addUser } from '../utils/userSlice';
 import { useDispatch } from 'react-redux';
@@ -29,10 +29,10 @@ const Login = () => {
     }
 
     const message = checkValidData(emailValue, passwordValue);
-    setErrorMessage(message); 
-    if(message) return;
+    setErrorMessage(message);
+    if (message) return;
 
-    if (!isSignInForm) { 
+    if (!isSignInForm) {
       createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then(async (userCredential) => {
           const user = userCredential.user;
@@ -90,123 +90,127 @@ const Login = () => {
   }
 
   return (
-    <div className="relative h-screen w-screen flex items-center justify-center">
-      <img className="absolute h-full w-full object-cover" src={BG_URL} alt="Background" />
-      <div className="absolute h-full w-full bg-gradient-to-b from-black/80 via-black/40 to-black/80"></div>
+    <div className="relative min-h-screen w-full flex items-center justify-center">
+      <div className="fixed inset-0">
+        <img className="h-full w-full object-cover" src={BG_URL} alt="Background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80"></div>
+      </div>
+
       <Header />
 
-      <div className="w-full max-w-md mx-auto z-10">
+      <div className="w-full max-w-[450px] px-4 py-24 z-10 relative">
         {showResetForm ? (
-          <form 
-            onSubmit={handleResetPassword} 
-            className="absolute top-1/2 left-1/2 w-[90%] sm:w-full max-w-md -translate-x-1/2 -translate-y-1/2 
-                       p-6 sm:p-8 md:p-10 bg-black/80 rounded-lg shadow-lg flex flex-col items-center 
-                       border border-gray-700"
+          <form
+            onSubmit={handleResetPassword}
+            className="w-full p-8 md:p-12 bg-black/75 rounded-lg shadow-2xl flex flex-col items-center border border-gray-700 backdrop-blur-sm"
           >
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-white text-center">
-              Update password or email
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white text-center">
+              Update password
             </h2>
-            <p className="mb-4 text-white text-center text-xs sm:text-sm md:text-base">
+            <p className="mb-6 text-gray-300 text-center text-sm md:text-base">
               We will send you an email with instructions to reset your password.
             </p>
             <input
               type="email"
-              className="w-full p-2 sm:p-3 mb-4 rounded bg-gray-700/80 text-white focus:outline-none text-sm sm:text-base"
+              className="w-full p-3 mb-4 rounded bg-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-red-600 border border-gray-600 transition-all"
               placeholder="Email"
               value={resetEmail}
               onChange={e => setResetEmail(e.target.value)}
             />
             <button
               type="submit"
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 sm:py-3 rounded mb-2 text-sm sm:text-base transition"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded mb-4 transition duration-200 transform hover:scale-[1.02]"
             >
               Email Me
             </button>
             {resetMessage && (
-              <p className={`mb-2 text-center text-xs sm:text-sm ${resetMessage.startsWith('Error') ? 'text-red-400' : 'text-green-400'}`}>
+              <p className={`mb-4 text-center text-sm ${resetMessage.startsWith('Error') ? 'text-red-400' : 'text-green-400'}`}>
                 {resetMessage}
               </p>
             )}
             <button
               type="button"
-              className="text-blue-400 underline text-xs sm:text-sm mt-2"
+              className="text-gray-400 hover:text-white transition-colors text-sm hover:underline"
               onClick={() => { setShowResetForm(false); setResetMessage(""); }}
             >
               Back to Sign In
             </button>
           </form>
         ) : (
-          <form 
-            onSubmit={(e) => e.preventDefault()} 
-            className="absolute top-1/2 left-1/2 w-[90%] sm:w-full max-w-md -translate-x-1/2 -translate-y-1/2 
-                       p-6 sm:p-8 md:p-12 bg-black/70 rounded-lg flex flex-col z-10 shadow-lg border border-gray-700"
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="w-full p-8 md:p-12 bg-black/75 rounded-lg flex flex-col shadow-2xl border border-gray-700 backdrop-blur-sm"
           >
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+            <h2 className="text-3xl font-bold text-white mb-8">
               {isSignInForm ? 'Sign In' : 'Sign Up'}
             </h2>
             {!isSignInForm && (
-              <input 
-                ref={name} 
-                type="text" 
-                placeholder="Full Name" 
-                className="p-2 sm:p-3 mb-4 rounded bg-gray-700/80 text-white focus:outline-none text-sm sm:text-base" 
+              <input
+                ref={name}
+                type="text"
+                placeholder="Full Name"
+                className="p-3.5 mb-4 rounded bg-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-red-600 border border-gray-600 transition-all"
               />
             )}
-            <input 
-              ref={email} 
-              type="text" 
-              placeholder="Email or mobile number" 
-              className="p-2 sm:p-3 mb-4 rounded bg-gray-700/80 text-white focus:outline-none text-sm sm:text-base" 
+            <input
+              ref={email}
+              type="text"
+              placeholder="Email or mobile number"
+              className="p-3.5 mb-4 rounded bg-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-red-600 border border-gray-600 transition-all"
             />
-            <input 
-              ref={password} 
-              type="password" 
-              placeholder="Password" 
-              className="p-2 sm:p-3 mb-6 rounded bg-gray-700/80 text-white focus:outline-none text-sm sm:text-base" 
+            <input
+              ref={password}
+              type="password"
+              placeholder="Password"
+              className="p-3.5 mb-6 rounded bg-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-red-600 border border-gray-600 transition-all"
             />
-            <p className="text-red-600 text-xs sm:text-sm mb-4 font-bold">
+            <p className="text-red-500 text-sm mb-4 font-semibold min-h-[20px]">
               {errormessage}
             </p>
-            <a
-              href="#"
-              className="text-blue-400 text-xs sm:text-sm mb-4 hover:underline"
-              onClick={() => setShowResetForm(true)}
-            >
-              Forgot password?
-            </a>
-            <div className="flex items-center mb-4">
-              <input type="checkbox" id="remember" className="mr-2" />
-              <label htmlFor="remember" className="text-gray-300 text-xs sm:text-sm">
-                Remember me
-              </label>
-            </div>
-            <button 
-              className="p-3 sm:p-4 my-6 bg-red-700 text-white w-full rounded-lg text-sm sm:text-base" 
+            <button
+              className="p-3.5 my-2 bg-red-600 hover:bg-red-700 text-white font-bold w-full rounded-lg transition duration-200 transform hover:scale-[1.02]"
               onClick={handleButtonClick}
             >
               {isSignInForm ? 'Sign In' : 'Sign Up'}
             </button>
-            <div className="text-gray-400 text-xs sm:text-sm text-center">
+
+            <div className="flex items-center justify-between mt-4 mb-6">
+              <div className="flex items-center">
+                <input type="checkbox" id="remember" className="mr-2 h-4 w-4 accent-red-600 bg-gray-700 border-none rounded" />
+                <label htmlFor="remember" className="text-gray-400 text-sm select-none cursor-pointer">
+                  Remember me
+                </label>
+              </div>
+              <a
+                href="#"
+                className="text-gray-400 text-sm hover:text-white hover:underline transition-colors"
+                onClick={(e) => { e.preventDefault(); setShowResetForm(true); }}
+              >
+                Forgot password?
+              </a>
+            </div>
+
+            <div className="text-gray-400 text-base mt-4">
               {isSignInForm ? (
-                <>
+                <p>
                   New to Netflix?{' '}
                   <span
-                    className="text-white font-semibold hover:underline cursor-pointer"
+                    className="text-white font-semibold hover:underline cursor-pointer ml-1"
                     onClick={toggleSignInForm}
                   >
                     Sign up now.
                   </span>
-                </>
+                </p>
               ) : (
-                <>
+                <p>
                   Already have an account?{' '}
                   <span
-                    className="text-white font-semibold hover:underline cursor-pointer"
+                    className="text-white font-semibold hover:underline cursor-pointer ml-1"
                     onClick={toggleSignInForm}
                   >
                     Sign in.
                   </span>
-                </>
+                </p>
               )}
             </div>
           </form>
