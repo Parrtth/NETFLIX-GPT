@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LandingHeader from './LandingHeader'
+import LoginFooter from './LoginFooter'
 import { checkValidData } from '../utils/validate'
 import {
   createUserWithEmailAndPassword,
@@ -15,6 +16,12 @@ import { addUser } from '../utils/userSlice'
 import { useDispatch } from 'react-redux'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
 const Login = () => {
   const name = useRef(null)
@@ -128,12 +135,20 @@ const Login = () => {
     />
   )
 
+  const pageLayout = (content) => (
+    <div className="relative min-h-screen flex flex-col">
+      {background}
+      <LandingHeader />
+      <main className="flex-1 flex items-center justify-center px-4 py-28 z-10 relative">
+        {content}
+      </main>
+      <LoginFooter />
+    </div>
+  )
+
   if (showResetForm) {
-    return (
-      <div className="relative min-h-screen flex items-center justify-center">
-        {background}
-        <LandingHeader />
-        <div className="w-full max-w-[400px] px-4 py-28 z-10 relative">
+    return pageLayout(
+      <div className="w-full max-w-[400px]">
           <form onSubmit={handleResetPassword} className="flex flex-col">
             <h2 className="text-2xl font-bold text-white mb-2">Reset password</h2>
             <p className="text-gray-400 text-sm mb-6">Enter your email and we'll send you a link to reset your password.</p>
@@ -161,18 +176,14 @@ const Login = () => {
               Back to Sign In
             </button>
           </form>
-        </div>
       </div>
     )
   }
 
   // Step 1: Email only – exact Netflix UI from reference
   if (step === 'email') {
-    return (
-      <div className="relative min-h-screen flex items-center justify-center">
-        {background}
-        <LandingHeader />
-        <div className="w-full max-w-[400px] px-4 py-28 z-10 relative text-center md:text-left">
+    return pageLayout(
+      <div className="w-full max-w-[400px] text-center md:text-left">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
             Enter your info to sign in
           </h1>
@@ -206,37 +217,39 @@ const Login = () => {
               Continue
             </Button>
           </form>
-          <div className="mt-8 text-left">
-            <p className="text-white text-sm font-medium mb-2">Get Help</p>
-            <a
-              href="#"
-              className="text-blue-400 text-sm underline block mb-1 hover:text-blue-300"
-              onClick={(e) => { e.preventDefault(); setShowResetForm(true); }}
-            >
-              Forgot email or mobile number?
-            </a>
-            <a href="#" className="text-blue-400 text-sm underline block hover:text-blue-300">
-              Learn more about sign-in
-            </a>
-          </div>
-          <p className="mt-8 text-gray-600 text-xs">
+          <Accordion type="single" collapsible className="mt-8 text-left w-full">
+            <AccordionItem value="get-help" className="border-none">
+              <AccordionTrigger className="text-white text-sm font-medium py-2 hover:no-underline hover:text-white [&[data-state=open]>svg]:rotate-180 [&_svg]:text-white [&_svg]:shrink-0">
+                Get Help
+              </AccordionTrigger>
+              <AccordionContent className="pt-3 pb-0 pl-0">
+                <a
+                  href="#"
+                  className="text-white/90 text-sm underline block mb-2 hover:text-white"
+                  onClick={(e) => { e.preventDefault(); setShowResetForm(true); }}
+                >
+                  Forgot email or mobile number?
+                </a>
+                <a href="#" className="text-white/90 text-sm underline block hover:text-white">
+                  Learn more about sign-in
+                </a>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <p className="mt-8 text-gray-500 text-xs">
             This page is protected by Google reCAPTCHA to ensure you're not a bot.{' '}
-            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline hover:text-blue-300">
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#0080ff] underline hover:text-[#0099ff]">
               Learn more
             </a>
           </p>
-        </div>
       </div>
     )
   }
 
   // Step 2: Password (sign in)
   if (step === 'password') {
-    return (
-      <div className="relative min-h-screen flex items-center justify-center">
-        {background}
-        <LandingHeader />
-        <div className="w-full max-w-[400px] px-4 py-28 z-10 relative text-center md:text-left">
+    return pageLayout(
+      <div className="w-full max-w-[400px] text-center md:text-left">
           <button
             type="button"
             className="text-gray-400 hover:text-white text-sm mb-6 block"
@@ -263,36 +276,38 @@ const Login = () => {
               Sign In
             </Button>
           </form>
-          <div className="mt-8 text-left">
-            <p className="text-white text-sm font-medium mb-2">Get Help</p>
-            <a
-              href="#"
-              className="text-blue-400 text-sm underline block mb-1 hover:text-blue-300"
-              onClick={(e) => { e.preventDefault(); setShowResetForm(true); }}
-            >
-              Forgot email or mobile number?
-            </a>
-            <a href="#" className="text-blue-400 text-sm underline block hover:text-blue-300">
-              Learn more about sign-in
-            </a>
-          </div>
-          <p className="mt-8 text-gray-600 text-xs">
+          <Accordion type="single" collapsible className="mt-8 text-left w-full">
+            <AccordionItem value="get-help" className="border-none">
+              <AccordionTrigger className="text-white text-sm font-medium py-2 hover:no-underline hover:text-white [&[data-state=open]>svg]:rotate-180 [&_svg]:text-white [&_svg]:shrink-0">
+                Get Help
+              </AccordionTrigger>
+              <AccordionContent className="pt-3 pb-0 pl-0">
+                <a
+                  href="#"
+                  className="text-white/90 text-sm underline block mb-2 hover:text-white"
+                  onClick={(e) => { e.preventDefault(); setShowResetForm(true); }}
+                >
+                  Forgot email or mobile number?
+                </a>
+                <a href="#" className="text-white/90 text-sm underline block hover:text-white">
+                  Learn more about sign-in
+                </a>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <p className="mt-8 text-gray-500 text-xs">
             This page is protected by Google reCAPTCHA to ensure you're not a bot.{' '}
-            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline hover:text-blue-300">
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#0080ff] underline hover:text-[#0099ff]">
               Learn more
             </a>
           </p>
-        </div>
       </div>
     )
   }
 
   // Step: Sign up (new account)
-  return (
-    <div className="relative min-h-screen flex items-center justify-center">
-      {background}
-      <LandingHeader />
-      <div className="w-full max-w-[400px] px-4 py-28 z-10 relative text-center md:text-left">
+  return pageLayout(
+    <div className="w-full max-w-[400px] text-center md:text-left">
         <button
           type="button"
           className="text-gray-400 hover:text-white text-sm mb-6 block"
@@ -338,14 +353,13 @@ const Login = () => {
             Sign in
           </button>
         </p>
-        <p className="mt-8 text-gray-600 text-xs">
+        <p className="mt-8 text-gray-500 text-xs">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.{' '}
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline hover:text-blue-300">
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#0080ff] underline hover:text-[#0099ff]">
             Learn more
           </a>
         </p>
       </div>
-    </div>
   )
 }
 

@@ -8,9 +8,11 @@ const LandingHeader = () => {
   const isLoginPage = pathname === '/login'
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 md:px-8 md:py-4 bg-gradient-to-b from-black/80 to-transparent">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 md:px-10 md:py-5 ${isLoginPage ? '' : 'bg-gradient-to-b from-black/80 to-transparent'}`}
+    >
       <Link to="/" className="flex items-center">
-        <img src={LOGO} alt="Netflix" className="h-9 md:h-12 w-auto" />
+        <img src={LOGO} alt="Netflix" className="h-10 md:h-14 w-auto" />
       </Link>
       {!isLoginPage && (
         <div className="flex items-center gap-3">
