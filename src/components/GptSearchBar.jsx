@@ -60,7 +60,7 @@ const GptSearchBar = () => {
             />
             <Button
               type="button"
-              variant="destructive"
+              variant="netflix"
               size="default"
               className="shrink-0 font-semibold"
               onClick={handleMovieSearchClick}

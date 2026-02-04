@@ -6,6 +6,7 @@ import { auth } from '../utils/firebase';
 import { USER_AVATAR, BG_URL } from '../utils/constants';
 import { addUser } from '../utils/userSlice';
 import { useDispatch } from 'react-redux';
+import { Button } from '@/components/ui/button';
 
 const Login = () => {
   const name = useRef(null);
@@ -117,12 +118,13 @@ const Login = () => {
               value={resetEmail}
               onChange={e => setResetEmail(e.target.value)}
             />
-            <button
+            <Button
               type="submit"
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded mb-4 transition duration-200 transform hover:scale-[1.02]"
+              variant="netflix"
+              className="w-full py-3 mb-4 font-bold"
             >
               Email Me
-            </button>
+            </Button>
             {resetMessage && (
               <p className={`mb-4 text-center text-sm ${resetMessage.startsWith('Error') ? 'text-red-400' : 'text-green-400'}`}>
                 {resetMessage}
@@ -167,12 +169,13 @@ const Login = () => {
             <p className="text-red-500 text-sm mb-4 font-semibold min-h-[20px]">
               {errormessage}
             </p>
-            <button
-              className="p-3.5 my-2 bg-red-600 hover:bg-red-700 text-white font-bold w-full rounded-lg transition duration-200 transform hover:scale-[1.02]"
+            <Button
+              variant="netflix"
+              className="w-full my-2 py-3.5 font-bold text-base"
               onClick={handleButtonClick}
             >
               {isSignInForm ? 'Sign In' : 'Sign Up'}
-            </button>
+            </Button>
 
             <div className="flex items-center justify-between mt-4 mb-6">
               <div className="flex items-center">
