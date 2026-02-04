@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
-import Header from './Header'
+import { useNavigate } from 'react-router-dom'
+import LandingHeader from './LandingHeader'
 import { checkValidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, getAuth, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
@@ -7,12 +8,15 @@ import { USER_AVATAR, BG_URL } from '../utils/constants';
 import { addUser } from '../utils/userSlice';
 import { useDispatch } from 'react-redux';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 
 const Login = () => {
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errormessage, setErrorMessage] = useState('');
@@ -49,6 +53,7 @@ const Login = () => {
             displayName: updatedUser.displayName,
             photoURL: updatedUser.photoURL,
           }));
+          navigate('/browse');
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -62,6 +67,16 @@ const Login = () => {
         });
     } else {
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          const u = userCredential.user;
+          dispatch(addUser({
+            uid: u.uid,
+            email: u.email,
+            displayName: u.displayName,
+            photoURL: u.photoURL,
+          }));
+          navigate('/browse');
+        })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -97,27 +112,26 @@ const Login = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80"></div>
       </div>
 
-      <Header />
+      <LandingHeader />
 
       <div className="w-full max-w-[450px] px-4 py-24 z-10 relative">
         {showResetForm ? (
-          <form
-            onSubmit={handleResetPassword}
-            className="w-full p-8 md:p-12 bg-black/75 rounded-lg shadow-2xl flex flex-col items-center border border-gray-700 backdrop-blur-sm"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white text-center">
-              Update password
-            </h2>
-            <p className="mb-6 text-gray-300 text-center text-sm md:text-base">
-              We will send you an email with instructions to reset your password.
-            </p>
-            <input
-              type="email"
-              className="w-full p-3 mb-4 rounded bg-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-red-600 border border-gray-600 transition-all"
-              placeholder="Email"
-              value={resetEmail}
-              onChange={e => setResetEmail(e.target.value)}
-            />
+          <Card className="w-full bg-black/90 border-zinc-700 backdrop-blur-sm">
+            <CardContent className="p-8 md:p-12">
+              <form onSubmit={handleResetPassword} className="flex flex-col items-center">
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white text-center">
+                  Update password
+                </h2>
+                <p className="mb-6 text-gray-300 text-center text-sm md:text-base">
+                  We will send you an email with instructions to reset your password.
+                </p>
+                <Input
+                  type="email"
+                  className="w-full h-11 mb-4 bg-zinc-800/50 border-zinc-600 text-white placeholder:text-gray-400"
+                  placeholder="Email"
+                  value={resetEmail}
+                  onChange={e => setResetEmail(e.target.value)}
+                />
             <Button
               type="submit"
               variant="netflix"
@@ -130,42 +144,43 @@ const Login = () => {
                 {resetMessage}
               </p>
             )}
-            <button
-              type="button"
-              className="text-gray-400 hover:text-white transition-colors text-sm hover:underline"
-              onClick={() => { setShowResetForm(false); setResetMessage(""); }}
-            >
-              Back to Sign In
-            </button>
-          </form>
+                <button
+                  type="button"
+                  className="text-gray-400 hover:text-white transition-colors text-sm hover:underline"
+                  onClick={() => { setShowResetForm(false); setResetMessage(""); }}
+                >
+                  Back to Sign In
+                </button>
+              </form>
+            </CardContent>
+          </Card>
         ) : (
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="w-full p-8 md:p-12 bg-black/75 rounded-lg flex flex-col shadow-2xl border border-gray-700 backdrop-blur-sm"
-          >
-            <h2 className="text-3xl font-bold text-white mb-8">
-              {isSignInForm ? 'Sign In' : 'Sign Up'}
-            </h2>
-            {!isSignInForm && (
-              <input
-                ref={name}
-                type="text"
-                placeholder="Full Name"
-                className="p-3.5 mb-4 rounded bg-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-red-600 border border-gray-600 transition-all"
-              />
-            )}
-            <input
-              ref={email}
-              type="text"
-              placeholder="Email or mobile number"
-              className="p-3.5 mb-4 rounded bg-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-red-600 border border-gray-600 transition-all"
-            />
-            <input
-              ref={password}
-              type="password"
-              placeholder="Password"
-              className="p-3.5 mb-6 rounded bg-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-red-600 border border-gray-600 transition-all"
-            />
+          <Card className="w-full bg-black/90 border-zinc-700 backdrop-blur-sm">
+            <CardContent className="p-8 md:p-12">
+              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col">
+                <h2 className="text-3xl font-bold text-white mb-8">
+                  {isSignInForm ? 'Sign In' : 'Sign Up'}
+                </h2>
+                {!isSignInForm && (
+                  <Input
+                    ref={name}
+                    type="text"
+                    placeholder="Full Name"
+                    className="mb-4 h-11 bg-zinc-800/50 border-zinc-600 text-white placeholder:text-gray-400"
+                  />
+                )}
+                <Input
+                  ref={email}
+                  type="text"
+                  placeholder="Email or mobile number"
+                  className="mb-4 h-11 bg-zinc-800/50 border-zinc-600 text-white placeholder:text-gray-400"
+                />
+                <Input
+                  ref={password}
+                  type="password"
+                  placeholder="Password"
+                  className="mb-6 h-11 bg-zinc-800/50 border-zinc-600 text-white placeholder:text-gray-400"
+                />
             <p className="text-red-500 text-sm mb-4 font-semibold min-h-[20px]">
               {errormessage}
             </p>
@@ -216,7 +231,9 @@ const Login = () => {
                 </p>
               )}
             </div>
-          </form>
+              </form>
+            </CardContent>
+          </Card>
         )}
       </div>
     </div>
