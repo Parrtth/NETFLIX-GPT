@@ -30,7 +30,7 @@ const Body = () => {
 
 
   return (
-    <div>
+    <div className="min-h-screen bg-black">
       <RouterProvider router={appRouter} />
     </div>
   )

@@ -2,6 +2,9 @@ import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import lang from '../utils/languageConstants';
 import MovieCard from './MovieCard';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDgyNWU0Mjk5ZjVmMWNiMjY0ZjA4OWY4YWM4MWNkZiIsIm5iZiI6MTc1MjA1NjAyNi40MTY5OTk4LCJzdWIiOiI2ODZlNDBkYTVhYmJiNjllM2Q5YTRiZTYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.P4NhZCvnvJGhukj96iJLiQogPc1bUTmrBh55dtnc91M";
 
@@ -19,7 +22,7 @@ const GptSearchBar = () => {
     e.preventDefault();
     setError("");
     setMovies([]);
-    const query = searchText.current.value;
+    const query = searchText.current?.value?.trim();
     if (!query) {
       setError("Please enter a search term.");
       return;
@@ -43,34 +46,51 @@ const GptSearchBar = () => {
 
   return (
     <>
-      {/* Responsive Search Bar */}
-      <form 
-        className='w-full sm:w-3/4 md:w-1/2 bg-black text-white flex flex-col sm:flex-row items-center rounded-lg shadow-lg p-2 gap-2'
-        onSubmit={handleSubmit}
-      >
-        <input 
-          ref={searchText}
-          type='text'
-          className='flex-1 p-3 rounded-lg border-2 border-gray-700 bg-gray-900 text-white focus:outline-none w-full'
-          placeholder={lang[langkey].gptSearchPlaceholder}
-        />
-        <button 
-          className='bg-red-700 hover:bg-red-800 transition-colors text-white px-5 py-3 rounded-lg font-semibold w-full sm:w-auto'
-          onClick={handleMovieSearchClick}
-        >
-          {lang[langkey].search}
-        </button>
-      </form>
+      <Card className="w-full max-w-2xl mx-auto border-border/50 bg-card/90 backdrop-blur-sm shadow-xl">
+        <CardContent className="pt-6">
+          <form
+            className="flex flex-col sm:flex-row gap-3"
+            onSubmit={handleSubmit}
+          >
+            <Input
+              ref={searchText}
+              type="text"
+              placeholder={lang[langkey].gptSearchPlaceholder}
+              className="flex-1 h-10 bg-muted/50 border-input placeholder:text-muted-foreground focus-visible:ring-primary"
+            />
+            <Button
+              type="button"
+              variant="destructive"
+              size="default"
+              className="shrink-0 font-semibold"
+              onClick={handleMovieSearchClick}
+            >
+              {lang[langkey].search}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
 
-      {/* Error Message */}
-      {error && <div className="text-red-400 mt-3 text-center">{error}</div>}
+      {error && (
+        <p className="text-destructive mt-3 text-center text-sm font-medium">
+          {error}
+        </p>
+      )}
 
-      {/* Movie Results */}
-      <div className="w-11/12 mx-auto mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {movies.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
+      {movies.length > 0 && (
+        <Card className="mt-8 border-border/50 bg-card/90 backdrop-blur-sm shadow-xl">
+          <CardHeader>
+            <h2 className="text-xl font-semibold text-foreground">Results</h2>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </>
   );
 };
