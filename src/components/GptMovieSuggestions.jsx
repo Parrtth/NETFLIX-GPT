@@ -16,23 +16,25 @@ const GptMovieSuggestions = () => {
                 {movieName}
               </h2>
               <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide -mx-1">
-                {movieResults[index]?.map((movie) => (
-                  <div
-                    key={movie.id}
-                    className="w-40 sm:w-44 flex-shrink-0 group"
-                  >
-                    <div className="rounded-lg overflow-hidden shadow-lg ring-1 ring-border/50 transition-all duration-200 group-hover:scale-105 group-hover:ring-primary/50">
-                      <img
-                        className="w-full aspect-[2/3] object-cover"
-                        alt={movie.title}
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      />
+                {movieResults[index]
+                  ?.filter((movie) => movie.poster_path && movie.poster_path.trim() !== '')
+                  .map((movie) => (
+                    <div
+                      key={movie.id}
+                      className="w-40 sm:w-44 flex-shrink-0 group"
+                    >
+                      <div className="rounded-lg overflow-hidden shadow-lg ring-1 ring-border/50 transition-all duration-200 group-hover:scale-105 group-hover:ring-primary/50">
+                        <img
+                          className="w-full aspect-[2/3] object-cover"
+                          alt={movie.title}
+                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        />
+                      </div>
+                      <h3 className="mt-2 text-sm font-medium text-muted-foreground line-clamp-2">
+                        {movie.title}
+                      </h3>
                     </div>
-                    <h3 className="mt-2 text-sm font-medium text-muted-foreground line-clamp-2">
-                      {movie.title}
-                    </h3>
-                  </div>
-                ))}
+                  ))}
               </div>
             </section>
           ))}

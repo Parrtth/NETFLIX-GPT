@@ -16,7 +16,7 @@ const GptMovieSuggestion = () => {
             <div className="flex overflow-x-auto custom-scrollbar pb-2">
               <div className="flex gap-2 sm:gap-3 md:gap-4">
                 {movieResults[idx]
-                  .filter(movie => movie && movie.title)
+                  .filter(movie => movie && movie.title && movie.poster_path && movie.poster_path.trim() !== '')
                   .map(movie => (
                     <MovieCard key={movie.id} movie={movie} />
                   ))}
