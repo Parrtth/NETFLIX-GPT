@@ -10,14 +10,13 @@ const MovieCard = ({ movie, priority = false }) => {
     <Link
       to={`/movie/${movie.id}`}
       className={`
-      relative rounded-lg overflow-hidden shadow-lg bg-[#181818] 
+      relative rounded-md overflow-hidden shadow-xl bg-black
       ${priority ? 'w-32 sm:w-36 md:w-40 lg:w-44' : 'w-28 sm:w-32 md:w-36 lg:w-40'} 
       ${priority ? 'h-48 sm:h-52 md:h-56 lg:h-60' : 'h-40 sm:h-44 md:h-48 lg:h-52'} 
       min-w-[112px] sm:min-w-[128px] md:min-w-[144px] lg:min-w-[160px] 
       flex flex-col group transition-all duration-300 
       hover:scale-110 hover:z-30 
-      border border-transparent hover:border-red-500/50
-      ${priority ? 'ring-2 ring-red-500/20' : ''}
+      ${priority ? 'ring-2 ring-red-600/30' : ''}
     `}>
       {posterUrl ? (
         <img

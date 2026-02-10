@@ -19,7 +19,19 @@ const Browse = () => {
   useUpcomingMovies();
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Subtle animated background when not in GPT search */}
+      {!showGptSearch && (
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <div 
+            className="absolute inset-0 opacity-10"
+            style={{
+              background: 'radial-gradient(circle at 20% 50%, rgba(229, 9, 20, 0.3), transparent 50%), radial-gradient(circle at 80% 80%, rgba(229, 9, 20, 0.2), transparent 50%)',
+              animation: 'pulse 15s ease-in-out infinite',
+            }}
+          />
+        </div>
+      )}
       <Header />
       {showGptSearch ? (
       <GptSearch />
@@ -29,6 +41,12 @@ const Browse = () => {
       <SecondaryContainer />
       </>
 )}
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 0.1; }
+          50% { opacity: 0.15; }
+        }
+      `}</style>
     </div>
   )
 }

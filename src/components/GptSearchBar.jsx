@@ -46,52 +46,49 @@ const GptSearchBar = () => {
 
   return (
     <>
-      <Card className="w-full max-w-2xl mx-auto border-border/50 bg-card/90 backdrop-blur-sm shadow-xl">
-        <CardContent className="pt-6">
-          <form
-            className="flex flex-col sm:flex-row gap-3"
-            onSubmit={handleSubmit}
+      <div className="w-full max-w-2xl mx-auto">
+        <form
+          className="flex flex-col sm:flex-row gap-3 relative"
+          onSubmit={handleSubmit}
+        >
+          {/* Glow effect behind search bar */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-red-600/20 via-red-600/10 to-transparent rounded-lg blur-xl opacity-50" />
+          
+          <Input
+            ref={searchText}
+            type="text"
+            placeholder={lang[langkey].gptSearchPlaceholder}
+            className="flex-1 h-14 bg-black/90 backdrop-blur-sm border-gray-700/50 text-white placeholder:text-gray-400 focus-visible:ring-red-600 focus-visible:border-red-600 text-lg shadow-2xl relative z-10 transition-all duration-300 hover:border-red-600/50"
+          />
+          <Button
+            type="button"
+            variant="netflix"
+            size="default"
+            className="shrink-0 font-semibold h-14 px-8 text-lg shadow-2xl relative z-10 transition-all duration-300 hover:scale-105 hover:shadow-red-600/50"
+            onClick={handleMovieSearchClick}
           >
-            <Input
-              ref={searchText}
-              type="text"
-              placeholder={lang[langkey].gptSearchPlaceholder}
-              className="flex-1 h-10 bg-muted/50 border-input placeholder:text-muted-foreground focus-visible:ring-primary"
-            />
-            <Button
-              type="button"
-              variant="netflix"
-              size="default"
-              className="shrink-0 font-semibold"
-              onClick={handleMovieSearchClick}
-            >
-              {lang[langkey].search}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            {lang[langkey].search}
+          </Button>
+        </form>
+      </div>
 
       {error && (
-        <p className="text-destructive mt-3 text-center text-sm font-medium">
+        <p className="text-red-500 mt-4 text-center text-sm font-medium">
           {error}
         </p>
       )}
 
       {movies.length > 0 && (
-        <Card className="mt-8 border-border/50 bg-card/90 backdrop-blur-sm shadow-xl">
-          <CardHeader>
-            <h2 className="text-xl font-semibold text-foreground">Results</h2>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {movies
-                .filter((movie) => movie.poster_path && movie.poster_path.trim() !== '')
-                .map((movie) => (
-                  <MovieCard key={movie.id} movie={movie} />
-                ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="mt-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Results</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {movies
+              .filter((movie) => movie.poster_path && movie.poster_path.trim() !== '')
+              .map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+          </div>
+        </div>
       )}
     </>
   );
