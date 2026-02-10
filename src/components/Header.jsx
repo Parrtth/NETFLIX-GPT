@@ -73,7 +73,7 @@ const Header = () => {
   }
 
   return (
-    <header className="fixed top-0 left-0 w-full px-4 py-2 bg-gradient-to-b from-black/90 to-transparent z-50 flex justify-between items-center">
+    <header className="fixed top-0 left-0 w-full px-4 py-2 bg-gradient-to-b from-black/80 via-black/40 to-transparent backdrop-blur-sm z-50 flex justify-between items-center">
       <img
         className="w-28 sm:w-32 md:w-44 p-2 cursor-pointer"
         src={LOGO}
