@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button } from '@/components/ui/button'
+import { Play, Info } from 'lucide-react'
 
 const VideoTitle = ({ title, overview }) => {
     return (
@@ -14,16 +16,23 @@ const VideoTitle = ({ title, overview }) => {
             </p>
 
             {/* Action Buttons */}
-            <div className='flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4'>
-                <button className='bg-white text-black px-4 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg font-semibold rounded-md hover:bg-gray-200 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl'>
-                    <span className="text-base sm:text-lg md:text-xl lg:text-2xl">▸</span>
+            <div className='flex flex-col sm:flex-row gap-3 sm:gap-4'>
+                <Button
+                    size="lg"
+                    className="bg-white text-black hover:bg-gray-200 font-semibold rounded-md shadow-lg hover:shadow-xl px-6 md:px-8 lg:px-10 py-3 md:py-4 text-base md:text-lg"
+                >
+                    <Play className="size-5 md:size-6 fill-black" />
                     Play
-                </button>
+                </Button>
 
-                <button className='bg-gray-600/80 text-white px-4 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg font-semibold rounded-md hover:bg-gray-500/80 transition-all duration-200 flex items-center justify-center gap-2 backdrop-blur-sm border border-gray-500/50'>
-                    <span className="text-base sm:text-lg md:text-xl lg:text-2xl">ℹ</span>
+                <Button
+                    variant="outline"
+                    size="lg"
+                    className="bg-gray-600/80 text-white hover:bg-gray-500/80 border-gray-500/50 backdrop-blur-sm font-semibold rounded-md px-6 md:px-8 lg:px-10 py-3 md:py-4 text-base md:text-lg"
+                >
+                    <Info className="size-5 md:size-6" />
                     More Info
-                </button>
+                </Button>
             </div>
         </div>
     )
