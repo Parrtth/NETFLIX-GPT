@@ -16,6 +16,7 @@ const GptSearchBar = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    handleMovieSearchClick(event);
   };
 
   const handleMovieSearchClick = async (e) => {

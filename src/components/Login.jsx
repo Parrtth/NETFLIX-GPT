@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LandingHeader from './LandingHeader'
 import LoginFooter from './LoginFooter'
-import { checkValidData } from '../utils/validate'
+import { checkValidData, isEmailValid } from '../utils/validate'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -42,6 +42,10 @@ const Login = () => {
     const val = emailValue.trim()
     if (!val) {
       setErrorMessage('Please enter your email or mobile number.')
+      return
+    }
+    if (!isEmailValid(val)) {
+      setErrorMessage('Please enter a valid email address.')
       return
     }
     setErrorMessage('')
@@ -230,7 +234,7 @@ const Login = () => {
                 >
                   Forgot email or mobile number?
                 </a>
-                <a href="#" className="text-white/90 text-sm underline block hover:text-white">
+                <a href="#" className="text-white/90 text-sm underline block hover:text-white" onClick={(e) => e.preventDefault()}>
                   Learn more about sign-in
                 </a>
               </AccordionContent>
@@ -289,7 +293,7 @@ const Login = () => {
                 >
                   Forgot email or mobile number?
                 </a>
-                <a href="#" className="text-white/90 text-sm underline block hover:text-white">
+                <a href="#" className="text-white/90 text-sm underline block hover:text-white" onClick={(e) => e.preventDefault()}>
                   Learn more about sign-in
                 </a>
               </AccordionContent>

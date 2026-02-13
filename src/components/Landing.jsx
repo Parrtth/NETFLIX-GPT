@@ -242,18 +242,18 @@ const Landing = () => {
       <footer className="py-12 px-4 md:px-8 border-t border-white/10 text-gray-500">
         <p className="mb-6">Questions? Call 000-800-919-1743</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-8">
-          <a href="#" className="hover:underline">FAQ</a>
-          <a href="#" className="hover:underline">Help Centre</a>
-          <a href="#" className="hover:underline">Account</a>
-          <a href="#" className="hover:underline">Media Centre</a>
-          <a href="#" className="hover:underline">Investor Relations</a>
-          <a href="#" className="hover:underline">Jobs</a>
-          <a href="#" className="hover:underline">Ways to Watch</a>
-          <a href="#" className="hover:underline">Terms of Use</a>
-          <a href="#" className="hover:underline">Privacy</a>
-          <a href="#" className="hover:underline">Cookie Preferences</a>
-          <a href="#" className="hover:underline">Corporate Information</a>
-          <a href="#" className="hover:underline">Contact Us</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>FAQ</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Help Centre</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Account</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Media Centre</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Investor Relations</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Jobs</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Ways to Watch</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Terms of Use</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Privacy</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Cookie Preferences</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Corporate Information</a>
+          <a href="#" className="hover:underline" onClick={(e) => e.preventDefault()}>Contact Us</a>
         </div>
         <p className="text-sm">Netflix India</p>
       </footer>
