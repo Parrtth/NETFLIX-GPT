@@ -128,8 +128,7 @@ const Landing = () => {
             <Button
               type="submit"
               variant="netflix"
-              size="lg"
-              className="font-semibold text-lg shrink-0 flex items-center gap-2"
+              className="h-12 !rounded-md font-semibold text-lg shrink-0 flex items-center gap-2 px-6"
             >
               Get Started <ChevronRight className="size-5" />
             </Button>
@@ -232,8 +231,7 @@ const Landing = () => {
           <Button
             type="submit"
             variant="netflix"
-            size="lg"
-            className="font-semibold text-lg shrink-0 flex items-center gap-2"
+            className="h-12 !rounded-md font-semibold text-lg shrink-0 flex items-center gap-2 px-6"
           >
             Get Started <ChevronRight className="size-5" />
           </Button>

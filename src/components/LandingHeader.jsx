@@ -1,7 +1,6 @@
-import React from 'react'
+import { Button } from '@/components/ui/button'
 import { Link, useLocation } from 'react-router-dom'
 import { LOGO } from '../utils/constants'
-import { Button } from '@/components/ui/button'
 
 const LandingHeader = () => {
   const { pathname } = useLocation()
