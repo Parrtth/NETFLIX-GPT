@@ -174,7 +174,7 @@ const Login = () => {
             )}
             <button
               type="button"
-              className="mt-6 text-gray-400 hover:text-white text-sm"
+              className="mt-6 text-gray-400 hover:text-white text-sm cursor-pointer"
               onClick={() => { setShowResetForm(false); setResetMessage(''); }}
             >
               Back to Sign In
@@ -195,7 +195,7 @@ const Login = () => {
             Or get started with a{' '}
             <button
               type="button"
-              className="text-white font-medium underline hover:no-underline"
+              className="text-white font-medium underline hover:no-underline cursor-pointer"
               onClick={() => setStep('signup')}
             >
               new account
@@ -229,12 +229,12 @@ const Login = () => {
               <AccordionContent className="pt-3 pb-0 pl-0">
                 <a
                   href="#"
-                  className="text-white/90 text-sm underline block mb-2 hover:text-white"
+                  className="text-white/90 text-sm underline block mb-2 hover:text-white cursor-pointer"
                   onClick={(e) => { e.preventDefault(); setShowResetForm(true); }}
                 >
                   Forgot email or mobile number?
                 </a>
-                <a href="#" className="text-white/90 text-sm underline block hover:text-white" onClick={(e) => e.preventDefault()}>
+                <a href="#" className="text-white/90 text-sm underline block hover:text-white cursor-pointer" onClick={(e) => e.preventDefault()}>
                   Learn more about sign-in
                 </a>
               </AccordionContent>
@@ -256,7 +256,7 @@ const Login = () => {
       <div className="w-full max-w-[400px] text-center md:text-left">
           <button
             type="button"
-            className="text-gray-400 hover:text-white text-sm mb-6 block"
+            className="text-gray-400 hover:text-white text-sm mb-6 block cursor-pointer"
             onClick={() => { setStep('email'); setErrorMessage(''); }}
           >
             ← Back
@@ -288,12 +288,12 @@ const Login = () => {
               <AccordionContent className="pt-3 pb-0 pl-0">
                 <a
                   href="#"
-                  className="text-white/90 text-sm underline block mb-2 hover:text-white"
+                  className="text-white/90 text-sm underline block mb-2 hover:text-white cursor-pointer"
                   onClick={(e) => { e.preventDefault(); setShowResetForm(true); }}
                 >
                   Forgot email or mobile number?
                 </a>
-                <a href="#" className="text-white/90 text-sm underline block hover:text-white" onClick={(e) => e.preventDefault()}>
+                <a href="#" className="text-white/90 text-sm underline block hover:text-white cursor-pointer" onClick={(e) => e.preventDefault()}>
                   Learn more about sign-in
                 </a>
               </AccordionContent>
@@ -353,7 +353,7 @@ const Login = () => {
         </form>
         <p className="mt-6 text-gray-400 text-base">
           Already have an account?{' '}
-          <button type="button" className="text-white font-semibold underline hover:no-underline" onClick={() => setStep('email')}>
+          <button type="button" className="text-white font-semibold underline hover:no-underline cursor-pointer" onClick={() => setStep('email')}>
             Sign in
           </button>
         </p>

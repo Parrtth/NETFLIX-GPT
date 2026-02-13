@@ -65,7 +65,7 @@ const MovieDetails = () => {
             {/* Back Button (Mobile/Desktop) - Positioned below header or clearly visible */}
             <button
                 onClick={() => navigate(-1)}
-                className="fixed top-24 left-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/80 transition md:top-28 md:left-8"
+                className="fixed top-24 left-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/80 transition cursor-pointer md:top-28 md:left-8"
             >
                 <ArrowLeft size={24} />
             </button>
@@ -126,7 +126,7 @@ const MovieDetails = () => {
                         </p>
 
                         <div className="flex gap-4 pt-4">
-                            <button className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded font-bold transition">
+                            <button className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded font-bold transition cursor-pointer">
                                 <Play fill="currentColor" size={20} /> Play
                             </button>
                             {trailerId && (

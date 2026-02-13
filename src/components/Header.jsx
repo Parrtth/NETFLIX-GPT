@@ -73,10 +73,10 @@ const Header = () => {
   }
 
   return (
-    <header className="fixed top-0 left-0 w-full px-4 py-2 bg-gradient-to-b from-black/80 via-black/40 to-transparent backdrop-blur-sm z-50 flex justify-between items-center">
+    <header className="fixed top-0 left-0 w-full px-4 md:px-6 lg:px-8 py-3 bg-gradient-to-b from-black/90 via-black/70 to-transparent backdrop-blur-md z-50 flex justify-between items-center">
       <Link to="/browse" className="block">
         <img
-          className="w-28 sm:w-32 md:w-44 p-2 cursor-pointer"
+          className="w-28 sm:w-32 md:w-44 p-2 cursor-pointer transition-opacity hover:opacity-80"
           src={LOGO}
           alt="Netflix"
         />
@@ -86,7 +86,7 @@ const Header = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden text-white hover:text-white hover:bg-white/10"
+          className="md:hidden text-white hover:text-white hover:bg-white/10 rounded-md"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -94,10 +94,10 @@ const Header = () => {
       )}
 
       {user?.uid && (
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-3">
           {showGptSearch && (
             <Select value={lang} onValueChange={handleLanguageChange}>
-              <SelectTrigger className="w-[7.5rem] h-9 bg-zinc-900/95 border-zinc-700 text-white hover:bg-zinc-800 hover:border-zinc-600 focus:ring-zinc-500">
+              <SelectTrigger className="w-[7.5rem] h-9 bg-zinc-900/95 border-zinc-700 text-white hover:bg-zinc-800 hover:border-zinc-600 focus:ring-zinc-500 rounded-md">
                 <SelectValue placeholder="Language" />
               </SelectTrigger>
               <SelectContent className="bg-zinc-900 border-zinc-700">
@@ -112,13 +112,13 @@ const Header = () => {
           <Button
             variant="outline"
             size="default"
-            className="bg-zinc-900/95 border-zinc-700 text-white hover:bg-zinc-800 hover:border-zinc-600 hover:text-white font-semibold uppercase"
+            className="bg-zinc-900/95 border-zinc-700 text-white hover:bg-zinc-800 hover:border-zinc-600 hover:text-white font-semibold rounded-md px-4 h-9"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? 'Homepage' : 'GPT Search'}
           </Button>
           <img
-            className="size-10 rounded-full object-cover border-2 border-zinc-600 cursor-pointer transition hover:border-zinc-500"
+            className="size-10 rounded-full object-cover border-2 border-zinc-600 cursor-pointer transition-all hover:border-zinc-400 hover:scale-105"
             alt="user"
             src={user?.photoURL || 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'}
             referrerPolicy="no-referrer"
@@ -130,7 +130,7 @@ const Header = () => {
           <Button
             variant="netflix"
             size="default"
-            className="font-semibold"
+            className="font-semibold rounded-md px-4 h-9"
             onClick={handleSignOut}
           >
             Sign Out
@@ -175,14 +175,14 @@ const Header = () => {
               <div className="py-4 flex flex-col gap-3">
                 <Button
                   variant="outline"
-                  className="w-full justify-center h-12 font-medium bg-zinc-900 border-zinc-700 text-white hover:bg-zinc-800 hover:border-zinc-600 hover:text-white"
+                  className="w-full justify-center h-12 font-medium bg-zinc-900 border-zinc-700 text-white hover:bg-zinc-800 hover:border-zinc-600 hover:text-white rounded-md"
                   onClick={handleGptSearchClick}
                 >
                   {showGptSearch ? 'Homepage' : 'GPT Search'}
                 </Button>
                 <Button
                   variant="netflix"
-                  className="w-full justify-center h-12 font-medium"
+                  className="w-full justify-center h-12 font-medium rounded-md"
                   onClick={handleSignOut}
                 >
                   Sign Out
